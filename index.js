@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-//Importer Routes
-const authRoute = require('./routes/auth');
+
+//Import Routes
+const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/posts');
 
 dotenv.config();
 
@@ -15,15 +17,17 @@ mongoose.connect(
         useUnifiedTopology: true
     },
     () => {
-        console.log("Connected to db!");
+        console.log('Connected to db!');
     }
 );
 
 //Middleware
 app.use(express.json());
+
 //Route Middlewares
-app.use("/api/user", authRoute);
+app.use('/api/user', authRoutes);
+app.use('/api/posts', postRoutes);
 
 app.listen(3000, () => {
-    console.log("Up and running");
+    console.log('Up and running');
 });
