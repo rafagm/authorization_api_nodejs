@@ -1,0 +1,51 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Authentication API
+  description: A simple authentication API made with nodejs
+schemes: 
+  - http
+host: localhost:3000
+basePath: /api
+paths:
+  /user/login:
+    post:
+      summary: Login
+      description: Login to the application with and existing user
+      produces: 
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          description: The user who wants to log in
+          schema:
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: The token linked to the user which logged in
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: The user's token
+        400:
+          description: The email or password is wrong
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Brief information about the error
+          
+
+                
+      
+  
