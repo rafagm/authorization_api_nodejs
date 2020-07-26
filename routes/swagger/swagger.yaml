@@ -10,6 +10,8 @@ basePath: /api
 paths:
   /user/login:
     post:
+      tags: 
+        - Authentication
       summary: Log in
       description: Log in to the application with and existing user
       produces: 
@@ -46,6 +48,8 @@ paths:
                 description: Brief information about the error
   /user/register:
     post:
+      tags:
+        - Authentication
       summary: It registers a new user
       description: End point that allows a new user to sign up in the application
       produces: 
