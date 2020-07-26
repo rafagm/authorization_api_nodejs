@@ -9,14 +9,14 @@ const jwt =  require('jsonwebtoken');
 
 
 router.post('/register', async (req, res) => {
-    //Validate the data before we create a user 
+    //Validate the data before creating a user 
     try {
         await registerValidation(req.body);
     } catch (error) {
-        return res.status(400).send(error.details[0].message);
+        return res.status(400).send({ error: error.details[0].message });
     }
     
-    //Hash password
+    //Hashed password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
 
 
     const userWithExistingEmail = await User.findOne({ email: newUser.email });
-    if (userWithExistingEmail) return res.status(409).send("The email already exists");
+    if (userWithExistingEmail) return res.status(409).send({ error: "The email already exists" });
 
     
     try {
@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
     const passwordsMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passwordsMatch) return res.status(400).send(vagueReponse);
 
-    //Create and assing token
+    //Create and assign token
     const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET, {expiresIn: 15});
     res.header('Auth-Token', token).send({token});
 });

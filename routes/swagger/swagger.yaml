@@ -10,14 +10,14 @@ basePath: /api
 paths:
   /user/login:
     post:
-      summary: Login
-      description: Login to the application with and existing user
+      summary: Log in
+      description: Log in to the application with and existing user
       produces: 
         - application/json
       parameters:
         - name: user
           in: body
-          description: The user who wants to log in
+          description: The user who wants to log in in the application
           schema:
             required:
               - email
@@ -29,7 +29,7 @@ paths:
                 type: string
       responses:
         200:
-          description: The token linked to the user which logged in
+          description: User logged in
           schema:
             type: object
             properties:
@@ -44,6 +44,63 @@ paths:
               error:
                 type: string
                 description: Brief information about the error
+  /user/register:
+    post:
+      summary: It registers a new user
+      description: End point that allows a new user to sign up in the application
+      produces: 
+        - application/json
+      parameters:
+        - name: new user
+          in: body
+          description: The new user who wants to sign up in the application
+          schema:
+            required:
+              - name
+              - email
+              - password
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: User created
+          schema:
+            type: object
+            properties:
+              userId:
+                type: string
+                description: The recently new user id
+                example: 5f1deccb4335273d9009bj84
+        400:
+          description: The name, email or password is wrong
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Brief information about which field is wrong
+                example: \"name\" length must be at least 6 characters long
+        409:
+          description: The email already exists
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Brief information about the error
+                example: The email already exists
+                
+                
+          
+        
+              
+        
+      
           
 
                 
