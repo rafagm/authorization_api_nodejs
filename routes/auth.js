@@ -5,10 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt =  require('jsonwebtoken');
 
 
-
-
-
-router.post('/register', async (req, res) => {
+const register =async (req, res) => {
     //Validate the data before creating a user 
     try {
         await registerValidation(req.body);
@@ -37,9 +34,9 @@ router.post('/register', async (req, res) => {
     } catch (error) {
         res.status(500).send(error);
     }
-});
+};
 
-router.post('/login', async (req, res) => {
+const  login =  async (req, res) => {
     //Validate login data
     try {
         await loginValidation(req.body);
@@ -57,8 +54,14 @@ router.post('/login', async (req, res) => {
     if (!passwordsMatch) return res.status(400).send(vagueReponse);
 
     //Create and assign token
-    const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET, {expiresIn: 15});
+    const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET, {expiresIn: 3600});
     res.header('Auth-Token', token).send({token});
-});
+};
+
+router.route('/login')
+    .post(login);
+
+router.route('/register')
+    .post(register);
 
 module.exports = router;
