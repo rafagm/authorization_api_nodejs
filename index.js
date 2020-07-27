@@ -35,6 +35,10 @@ app.use(express.json());
 app.use('/api/user', authRoutes);
 app.use('/api/posts', postRoutes);
 
+app.get("/", function(req, res) {
+    res.send("Test deploy");
+  });
+
 app.listen(3000, () => {
     console.log('Up and running');
 });
