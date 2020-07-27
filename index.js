@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+//const dotenv = require('dotenv');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
 
@@ -14,7 +14,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
 
-dotenv.config();
+//dotenv.config();
 
 //Connect to DB
 mongoose.connect(
