@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 //Set up Swagger
 const swaggerDocument = YAML.load('./routes/swagger/swagger.yaml');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Import Routes
 const authRoutes = require('./routes/auth');
@@ -34,10 +34,6 @@ app.use(express.json());
 //Route Middlewares
 app.use('/api/user', authRoutes);
 app.use('/api/posts', postRoutes);
-
-app.get("/", function(req, res) {
-    res.send("Test deploy");
-  });
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Up and running');

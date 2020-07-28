@@ -4,8 +4,8 @@ info:
   title: Authentication API
   description: A simple authentication API made with nodejs
 schemes: 
-  - http
-host: localhost:3000
+  - https
+host: fierce-chamber-74137.herokuapp.com:3000
 basePath: /api
 paths:
   /user/login:
