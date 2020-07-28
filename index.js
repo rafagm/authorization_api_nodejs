@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 //Set up Swagger
 const swaggerDocument = YAML.load('./routes/swagger/swagger.yaml');
 
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Import Routes
 const authRoutes = require('./routes/auth');

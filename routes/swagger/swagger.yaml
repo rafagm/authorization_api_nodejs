@@ -5,7 +5,7 @@ info:
   description: A simple authentication API made with nodejs
 schemes: 
   - https
-host: fierce-chamber-74137.herokuapp.com:3000
+host: fierce-chamber-74137.herokuapp.com:443
 basePath: /api
 paths:
   /user/login:
