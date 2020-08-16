@@ -4,9 +4,10 @@ const Joi = require('@hapi/joi');
 //Register Validation
 const  registerValidation = async (user) => {
     const schema = Joi.object({
-        name: Joi.string().min(6).required(),
-        email: Joi.string().min(6).required().email(),
-        password: Joi.string().min(6).required()
+        name: Joi.string().min(6).max(255).required(),
+        email: Joi.string().min(6).max(255).required().email(),
+        password: Joi.string().min(6).max(1024).required(),
+        rol: Joi.string().min(6)
     });
 
     return  schema.validateAsync(user);

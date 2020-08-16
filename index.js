@@ -1,19 +1,22 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-//const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
 
 //Set up Swagger
 const swaggerDocument = YAML.load('./routes/swagger/swagger.yaml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+app.use(cors());
+
 //Import Routes
 const authRoutes = require('./routes/auth');
 
-//dotenv.config();
+dotenv.config();
 
 //Connect to DB
 mongoose.connect(
